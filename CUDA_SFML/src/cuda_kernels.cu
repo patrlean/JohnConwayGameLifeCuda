@@ -21,7 +21,7 @@ __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
         if( aliveNeighbors == 3 && !A->elements[index]){
             setElement(B, row, col, true);
         }else if( (aliveNeighbors != 2 && aliveNeighbors != 3) && A->elements[index]){
-            setElement(B, row, col, false);
+            setElement(B, row, col, true);
         }else{
             setElement(B, row, col, false);
         }
@@ -32,7 +32,7 @@ void launchMatMulKernel(Matrix* A, Matrix* B, int width, int height) {
     dim3 blockSize(32, 32);
     dim3 gridSize((width + blockSize.x - 1) / blockSize.x, 
         (height + blockSize.y - 1) / blockSize.y);
-    matMulKernel<<<gridSize, blockSize>>>(A, B, width, height)
+    matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
 }
 
 

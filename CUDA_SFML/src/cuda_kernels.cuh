@@ -11,4 +11,6 @@ __device__ void setElement(Matrix *A, int row, int col, bool value);
 
 __device__ int countAliveMembers(Matrix *A, int row, int col);
 
+void launchMatMulKernel(Matrix* A, Matrix* B, int width, int height);
+
 #endif

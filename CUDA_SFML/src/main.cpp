@@ -59,7 +59,7 @@ int main() {
             }
         }
         // swap A and B every loop
-        matMulKernel(A, B, width, height);
+        launchMatMulKernel(A, B, width, height);
 
         // synchronize
         cudaDeviceSynchronize();
@@ -71,12 +71,12 @@ int main() {
         grid.showGrid(window);
 
         // swap A and B every loop
-        matMulKernel(B, A, width, height);
+        launchMatMulKernel(B, A, width, height);
+
+	// synchronize
+        cudaDeviceSynchronize();
 
         grid.updateLivingStatus(B, A);
-
-        // synchronize
-        cudaDeviceSynchronize();
 
         // show the grid
         grid.showGrid(window);
