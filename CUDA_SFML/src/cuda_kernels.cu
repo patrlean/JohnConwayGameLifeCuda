@@ -2,7 +2,7 @@
 #include "cuda_kernels.cuh"
 #include <iostream>
 
-__global__ void matMulKernel(const Matrix* A, const Matrix* B, int width, int height) {
+__global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
     // get position of current thread
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;

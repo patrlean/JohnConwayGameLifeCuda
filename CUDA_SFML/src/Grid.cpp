@@ -6,6 +6,7 @@ Description:
 This is the implementation of Grid class, which is used to store the status of the grid and some functions to generate the living status of the blocks.
 */
 #include "Grid.hpp"
+#include <random>
 
 // constructor
 Grid::Grid(int rows, int cols, Matrix *matrix){
@@ -75,7 +76,7 @@ void Grid::updateLivingStatus(Matrix *matrix, Matrix *updatedMatrix){
             // false ^ true == true
             // true ^ false == true
             block.isAlive = matrix->elements[row_idx * cols + col_idx] ^ updatedMatrix->elements[row_idx * cols + col_idx];
-
+	    if (rand() % 10 == 0) { std::cout <<block.isAlive << std::endl;}
             // set color
             if( block.isAlive){
                 block.setFillColor(sf::Color::White);
@@ -126,5 +127,6 @@ void Grid::showGrid(sf::RenderWindow &window){
             window.draw(block);
         }
     }
+    std::cout << "drawing complete" << std::endl;
     window.display();
 }
