@@ -6,10 +6,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Set the required CUDA version (optional)
 set(CMAKE_CUDA_STANDARD 11)
-set(CMAKE_CUDA_ARCHITECTURES 75)  # or specify your target architecture here
+set(CMAKE_CUDA_ARCHITECTURES 80)  # or specify your target architecture here
 
 # Project name
-project(cuda_sfml_app LANGUAGES CXX CUDA)
+project(game_cuda LANGUAGES CXX CUDA)
 
 # Include SFML
 include_directories(${PROJECT_SOURCE_DIR}/../SFML/include)
@@ -17,7 +17,7 @@ include_directories(${PROJECT_SOURCE_DIR}/../SFML/include)
 link_directories(${PROJECT_SOURCE_DIR}/../SFML/lib)
 
 # Include CUDA
-find_package(CUDA REQUIRED)
+# find_package(CUDA REQUIRED)
 
 # Include CUDA headers and libraries
 include_directories(${CUDA_INCLUDE_DIRS})
@@ -28,10 +28,10 @@ link_directories(${CUDA_LIBRARIES})
 include_directories(include)
 
 # Set CUDA architecture
-set(CUDA_ARCHITECTURES 52)
+# set(CUDA_ARCHITECTURES 80)
 
 # Specify the target executable
-add_executable(cuda_sfml_app 
+add_executable(game_cuda 
     src/main.cpp 
     src/cuda_kernels.cu
     src/cuda_kernels.cuh
@@ -48,16 +48,16 @@ add_executable(cuda_sfml_app
     )
 
 # Link SFML libraries
-target_link_libraries(cuda_sfml_app sfml-graphics sfml-window sfml-system ${CUDA_LIBRARIES})
+target_link_libraries(game_cuda sfml-graphics sfml-window sfml-system ${CUDA_LIBRARIES})
 
 # Specify C++11 standard
 #set_property(TARGET cuda_sfml_app PROPERTY CXX_STANDARD 17)
 
 set_target_properties(
-    cuda_sfml_app PROPERTIES
+    game_cuda PROPERTIES
     VS_DEBUGGER_WORKING_DIRECTORY "${COMMON_OUTPUT_DIR}/bin"
 )
 # Compile Info
-set_target_properties(cuda_sfml_app PROPERTIES CUDA_ARCHITECTURES "50;72")
-target_compile_features(cuda_sfml_app PUBLIC cxx_std_11)
-target_compile_features(cuda_sfml_app PUBLIC cuda_std_11)
+set_target_properties(game_cuda PROPERTIES CUDA_ARCHITECTURES "80")
+target_compile_features(game_cuda PUBLIC cxx_std_11)
+target_compile_features(game_cuda PUBLIC cuda_std_11)

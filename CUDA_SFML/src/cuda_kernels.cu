@@ -1,13 +1,19 @@
 // cuda_kernels.cu
 #include "cuda_kernels.cuh"
 #include <iostream>
+#include <stdio.h>
 
 __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
     // get position of current thread
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
     int index = row * width + col;
-
+    printf(" thread x index is %d\n", threadIdx.x);
+    // print element
+    if (row == 400 && col == 200){
+       printf("element is %d\n", A -> elements[index]);
+       }
+    
     // update matrix
     if (row < height && col < width) {
         int aliveNeighbors = countAliveMembers(A, row, col);
@@ -17,7 +23,7 @@ __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
         }else if( (aliveNeighbors != 2 && aliveNeighbors != 3) && A->elements[index]){
             setElement(B, row, col, false);
         }else{
-            setElement(B, row, col, A->elements[index]);
+            setElement(B, row, col, false);
         }
     }
 }

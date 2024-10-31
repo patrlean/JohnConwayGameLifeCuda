@@ -58,7 +58,7 @@
 /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/SFML/src/SFML/Graphics/CMakeFiles/install.dir
 /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/SFML/src/SFML/Graphics/CMakeFiles/install/local.dir
 /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/SFML/src/SFML/Graphics/CMakeFiles/install/strip.dir
-/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/CUDA_SFML/CMakeFiles/cuda_sfml_app.dir
+/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/CUDA_SFML/CMakeFiles/game_cuda.dir
 /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/CUDA_SFML/CMakeFiles/package.dir
 /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/CUDA_SFML/CMakeFiles/package_source.dir
 /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/CUDA_SFML/CMakeFiles/edit_cache.dir

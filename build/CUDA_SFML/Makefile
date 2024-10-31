@@ -182,25 +182,25 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/rule:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/rule
-.PHONY : CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/rule
+CUDA_SFML/CMakeFiles/game_cuda.dir/rule:
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CUDA_SFML/CMakeFiles/game_cuda.dir/rule
+.PHONY : CUDA_SFML/CMakeFiles/game_cuda.dir/rule
 
 # Convenience name for target.
-cuda_sfml_app: CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/rule
-.PHONY : cuda_sfml_app
+game_cuda: CUDA_SFML/CMakeFiles/game_cuda.dir/rule
+.PHONY : game_cuda
 
 # fast build rule for target.
-cuda_sfml_app/fast:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build
-.PHONY : cuda_sfml_app/fast
+game_cuda/fast:
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/build
+.PHONY : game_cuda/fast
 
 src/Block.o: src/Block.cpp.o
 .PHONY : src/Block.o
 
 # target to build an object file
 src/Block.cpp.o:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/Block.cpp.o
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/Block.cpp.o
 .PHONY : src/Block.cpp.o
 
 src/Block.i: src/Block.cpp.i
@@ -208,7 +208,7 @@ src/Block.i: src/Block.cpp.i
 
 # target to preprocess a source file
 src/Block.cpp.i:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/Block.cpp.i
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/Block.cpp.i
 .PHONY : src/Block.cpp.i
 
 src/Block.s: src/Block.cpp.s
@@ -216,7 +216,7 @@ src/Block.s: src/Block.cpp.s
 
 # target to generate assembly for a file
 src/Block.cpp.s:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/Block.cpp.s
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/Block.cpp.s
 .PHONY : src/Block.cpp.s
 
 src/Globals.o: src/Globals.cpp.o
@@ -224,7 +224,7 @@ src/Globals.o: src/Globals.cpp.o
 
 # target to build an object file
 src/Globals.cpp.o:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/Globals.cpp.o
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/Globals.cpp.o
 .PHONY : src/Globals.cpp.o
 
 src/Globals.i: src/Globals.cpp.i
@@ -232,7 +232,7 @@ src/Globals.i: src/Globals.cpp.i
 
 # target to preprocess a source file
 src/Globals.cpp.i:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/Globals.cpp.i
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/Globals.cpp.i
 .PHONY : src/Globals.cpp.i
 
 src/Globals.s: src/Globals.cpp.s
@@ -240,7 +240,7 @@ src/Globals.s: src/Globals.cpp.s
 
 # target to generate assembly for a file
 src/Globals.cpp.s:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/Globals.cpp.s
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/Globals.cpp.s
 .PHONY : src/Globals.cpp.s
 
 src/Grid.o: src/Grid.cpp.o
@@ -248,7 +248,7 @@ src/Grid.o: src/Grid.cpp.o
 
 # target to build an object file
 src/Grid.cpp.o:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/Grid.cpp.o
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/Grid.cpp.o
 .PHONY : src/Grid.cpp.o
 
 src/Grid.i: src/Grid.cpp.i
@@ -256,7 +256,7 @@ src/Grid.i: src/Grid.cpp.i
 
 # target to preprocess a source file
 src/Grid.cpp.i:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/Grid.cpp.i
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/Grid.cpp.i
 .PHONY : src/Grid.cpp.i
 
 src/Grid.s: src/Grid.cpp.s
@@ -264,7 +264,7 @@ src/Grid.s: src/Grid.cpp.s
 
 # target to generate assembly for a file
 src/Grid.cpp.s:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/Grid.cpp.s
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/Grid.cpp.s
 .PHONY : src/Grid.cpp.s
 
 src/cuda_kernels.o: src/cuda_kernels.cu.o
@@ -272,7 +272,7 @@ src/cuda_kernels.o: src/cuda_kernels.cu.o
 
 # target to build an object file
 src/cuda_kernels.cu.o:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/cuda_kernels.cu.o
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/cuda_kernels.cu.o
 .PHONY : src/cuda_kernels.cu.o
 
 src/cuda_kernels.i: src/cuda_kernels.cu.i
@@ -280,7 +280,7 @@ src/cuda_kernels.i: src/cuda_kernels.cu.i
 
 # target to preprocess a source file
 src/cuda_kernels.cu.i:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/cuda_kernels.cu.i
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/cuda_kernels.cu.i
 .PHONY : src/cuda_kernels.cu.i
 
 src/cuda_kernels.s: src/cuda_kernels.cu.s
@@ -288,7 +288,7 @@ src/cuda_kernels.s: src/cuda_kernels.cu.s
 
 # target to generate assembly for a file
 src/cuda_kernels.cu.s:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/cuda_kernels.cu.s
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/cuda_kernels.cu.s
 .PHONY : src/cuda_kernels.cu.s
 
 src/main.o: src/main.cpp.o
@@ -296,7 +296,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/main.cpp.o
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -304,7 +304,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/main.cpp.i
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -312,7 +312,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/main.cpp.s
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 src/parameterParse.o: src/parameterParse.cpp.o
@@ -320,7 +320,7 @@ src/parameterParse.o: src/parameterParse.cpp.o
 
 # target to build an object file
 src/parameterParse.cpp.o:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/parameterParse.cpp.o
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/parameterParse.cpp.o
 .PHONY : src/parameterParse.cpp.o
 
 src/parameterParse.i: src/parameterParse.cpp.i
@@ -328,7 +328,7 @@ src/parameterParse.i: src/parameterParse.cpp.i
 
 # target to preprocess a source file
 src/parameterParse.cpp.i:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/parameterParse.cpp.i
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/parameterParse.cpp.i
 .PHONY : src/parameterParse.cpp.i
 
 src/parameterParse.s: src/parameterParse.cpp.s
@@ -336,7 +336,7 @@ src/parameterParse.s: src/parameterParse.cpp.s
 
 # target to generate assembly for a file
 src/parameterParse.cpp.s:
-	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/parameterParse.cpp.s
+	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build && $(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/src/parameterParse.cpp.s
 .PHONY : src/parameterParse.cpp.s
 
 # Help Target
@@ -353,7 +353,7 @@ help:
 	@echo "... package"
 	@echo "... package_source"
 	@echo "... rebuild_cache"
-	@echo "... cuda_sfml_app"
+	@echo "... game_cuda"
 	@echo "... src/Block.o"
 	@echo "... src/Block.i"
 	@echo "... src/Block.s"

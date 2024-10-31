@@ -234,17 +234,17 @@ sfml-graphics/fast:
 .PHONY : sfml-graphics/fast
 
 #=============================================================================
-# Target rules for targets named cuda_sfml_app
+# Target rules for targets named game_cuda
 
 # Build rule for target.
-cuda_sfml_app: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 cuda_sfml_app
-.PHONY : cuda_sfml_app
+game_cuda: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 game_cuda
+.PHONY : game_cuda
 
 # fast build rule for target.
-cuda_sfml_app/fast:
-	$(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build
-.PHONY : cuda_sfml_app/fast
+game_cuda/fast:
+	$(MAKE) $(MAKESILENT) -f CUDA_SFML/CMakeFiles/game_cuda.dir/build.make CUDA_SFML/CMakeFiles/game_cuda.dir/build
+.PHONY : game_cuda/fast
 
 # Help Target
 help:
@@ -260,7 +260,7 @@ help:
 	@echo "... package"
 	@echo "... package_source"
 	@echo "... rebuild_cache"
-	@echo "... cuda_sfml_app"
+	@echo "... game_cuda"
 	@echo "... sfml-graphics"
 	@echo "... sfml-network"
 	@echo "... sfml-system"
