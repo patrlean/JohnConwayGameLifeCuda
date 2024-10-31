@@ -8,14 +8,10 @@ This is the implementation of Grid class, which is used to store the status of t
 #include "Grid.hpp"
 
 // constructor
-Grid::Grid(int rows, int cols){
+Grid::Grid(int rows, int cols, Matrix *matrix){
     this->rows = rows;
     this->cols = cols;
     this->blocks = std::vector<std::vector<Block>> (rows, std::vector<Block>(cols)); // initialize the grid with blocks
-    
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, 1);
 
     int row_idx = 0;
     int col_idx = 0;
@@ -24,7 +20,7 @@ Grid::Grid(int rows, int cols){
         col_idx = 0;
         for (auto &block : row){
             block.setPosition(cellSize * col_idx, cellSize * row_idx); // set the position of the block
-            block.setAlive(dis(gen)); // set the living status of the block
+            block.setAlive(matrix->elements[row_idx * cols + col_idx]); // set the living status of the block
             col_idx++;
         }
         row_idx++;
@@ -51,31 +47,34 @@ bool Grid::updateByRule(int aliveNeighbors, bool isAlive){
 // use for parallel
 // @input: startRow - the start row of the range
 // @input: endRow - the end row of the range
-void Grid::generateLivingStatusForRange(int startRow, int endRow) {
-    int aliveNeighbors = 0;
-    for (int row_idx = startRow; row_idx < endRow; row_idx++) {
-        for (int col_idx = 0; col_idx < cols; col_idx++) {
-            auto &block = blocks[row_idx][col_idx];
-            // count the number of alive neighbors
-            aliveNeighbors = countAliveNeighbors(row_idx, col_idx);
-            // update the living status of the block
-            block.isUpdated = updateByRule(aliveNeighbors, block.isAlive);
-        }
-    }
-}
+// void Grid::generateLivingStatusForRange(int startRow, int endRow) {
+//     int aliveNeighbors = 0;
+//     for (int row_idx = startRow; row_idx < endRow; row_idx++) {
+//         for (int col_idx = 0; col_idx < cols; col_idx++) {
+//             auto &block = blocks[row_idx][col_idx];
+//             // count the number of alive neighbors
+//             aliveNeighbors = countAliveNeighbors(row_idx, col_idx);
+//             // update the living status of the block
+//             block.isUpdated = updateByRule(aliveNeighbors, block.isAlive);
+//         }
+//     }
+// }
 
 
 // update the block status and set the color
 // @input: grid - the grid of the game
-void Grid::updateLivingStatus(){
+void Grid::updateLivingStatus(Matrix *matrix, Matrix *updatedMatrix){
+    int row_idx = 0;    
+    int col_idx = 0;
     for( auto &row : this -> blocks){
+        col_idx = 0;
         for( auto &block : row){
             // update all blocks
             // false ^ false == false
             // true ^ true == false
             // false ^ true == true
             // true ^ false == true
-            block.isAlive = block.isAlive ^ block.isUpdated;
+            block.isAlive = matrix->elements[row_idx * cols + col_idx] ^ updatedMatrix->elements[row_idx * cols + col_idx];
 
             // set color
             if( block.isAlive){
@@ -86,7 +85,9 @@ void Grid::updateLivingStatus(){
 
             // reset isUpdated
             block.isUpdated = false;
+            col_idx++;
         }
+        row_idx++;
     }
 }
 
@@ -114,4 +115,16 @@ int Grid::countAliveNeighbors(int x, int y){
         }
     }
     return count;
+}
+
+// show the grid
+// @input: window - the window of the game
+void Grid::showGrid(sf::RenderWindow &window){
+    window.clear();
+    for (auto &row : blocks){
+        for (auto &block : row){
+            window.draw(block);
+        }
+    }
+    window.display();
 }

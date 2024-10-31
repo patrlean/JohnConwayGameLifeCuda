@@ -16,6 +16,7 @@ Some header files are included.
 
 #include "Block.hpp"
 #include "Globals.hpp"
+#include "Matrix.hpp"
 #include <omp.h>
 #include <iostream>
 
@@ -23,7 +24,7 @@ class Grid {
 public:
     std::vector<std::vector<Block>> blocks;
 
-    Grid(int rows, int cols);
+    Grid(int rows, int cols, Matrix *matrix);
     
     void generateLivingStatusSequentially();
     void generateLivingStatusForRange(int startRow, int endRow);
@@ -31,7 +32,9 @@ public:
     void generateLivingStatusOMP();
 
     bool updateByRule(int aliveNeighbors, bool isAlive);
-    void updateLivingStatus();
+    void updateLivingStatus(Matrix *matrix, Matrix *updatedMatrix);
+
+    void showGrid(sf::RenderWindow &window);
     
 private:
     

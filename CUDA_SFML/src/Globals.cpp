@@ -10,8 +10,8 @@ This is the implementation of Globals.hpp, which is used to store the global var
 #include "Globals.hpp"
 
 // set scene
-int verticalBlockNumbers;
-int horizontalBlockNumbers;
+int width;
+int height;
 
 // set window
 int windowWidth = 800;

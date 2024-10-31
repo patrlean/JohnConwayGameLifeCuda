@@ -3,39 +3,47 @@
 #include <cuda_runtime.h>
 #include <iostream>
 
-__global__ void vectorAddKernel(const float* A, const float* B, float* C, int N) {
-    int i = blockIdx.x * blockDim.x + threadIdx.x;
-    if (i < N) {
-        C[i] = A[i] + B[i];
+__global__ void matMulKernel(const Matrix* A, const Matrix* B, int width, int height) {
+    // get position of current thread
+    int row = blockIdx.y * blockDim.y + threadIdx.y;
+    int col = blockIdx.x * blockDim.x + threadIdx.x;
+    int index = row * width + col;
+
+    // update matrix
+    if (row < height && col < width) {
+        int aliveNeighbors = countAliveMembers(A, row, col);
+        // check rules and generate update matrix
+        if( aliveNeighbors == 3 && !A->elements[index]){
+            setElement(B, row, col, true);
+        }else if( (aliveNeighbors != 2 && aliveNeighbors != 3) && A->elements[index]){
+            setElement(B, row, col, false);
+        }else{
+            setElement(B, row, col, A->elements[index]);
+        }
     }
 }
 
-void vectorAdd(const float* A, const float* B, float* C, int N) 
-{
-    float *d_A, *d_B, *d_C;
-    size_t size = N * sizeof(float);
 
-    // Allocate memory on GPU
-    cudaMalloc(&d_A, size);
-    cudaMalloc(&d_B, size);
-    cudaMalloc(&d_C, size);
+__device__ void setElement(Matrix *A, int row, int col, bool value) {
+    A->elements[row * A->width + col] = value;
+}
 
-    // Copy vectors from host to device
-    cudaMemcpy(d_A, A, size, cudaMemcpyHostToDevice);
-    cudaMemcpy(d_B, B, size, cudaMemcpyHostToDevice);
-
-    // Launch kernel
-    int threadsPerBlock = 32;
-    int blocksPerGrid = (N + threadsPerBlock - 1) / threadsPerBlock;
-    std::cout << "blocksPerGrid = " << blocksPerGrid << std::endl;
-    vectorAddKernel<<<blocksPerGrid, threadsPerBlock>>>(d_A, d_B, d_C, N);
-
-    cudaDeviceSynchronize();
-    // Copy result back to host
-    cudaMemcpy(C, d_C, size, cudaMemcpyDeviceToHost);
-
-    // Free memory on GPU
-    cudaFree(d_A);
-    cudaFree(d_B);
-    cudaFree(d_C);
+__device__ int countAliveMembers(Matrix *A, int row, int col) {
+    int count = 0;
+    // iterate all neighbors
+    for( int i = -1; i <= 1; i++){
+        for( int j = -1; j <= 1; j++){
+            // skip itself    
+            if( i == 0 && j == 0){
+                continue;
+            }
+            // count the number of alive neighbors
+            if(row + i >= 0 && row + i < A->height && col + j >= 0 && col + j < A->width){
+                if(A->elements[(row + i) * A->width + col + j]){
+                    count++;
+                }
+            }
+        }
+    }
+    return count;
 }

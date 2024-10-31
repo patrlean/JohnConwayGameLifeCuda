@@ -3,44 +3,83 @@
 #include "cuda_kernels.cuh"
 #include <iostream>
 #include <vector>
+#include <random>
 
-
+#include "Globals.hpp"
+#include "matrix.hpp"
+#include "Grid.hpp"
 int main() {
-    const int N = 1024;
-    std::vector<float> A(N, 1.0f);
-    std::vector<float> B(N, 2.0f);
-    std::vector<float> C(N);
+    // calculate the number of blocks in the window
+    width = windowWidth / cellSize;
+    height = windowHeight / cellSize;
+    Matrix *A, *B;
 
-    // Perform CUDA vector addition
-    vectorAdd(A.data(), B.data(), C.data(), N);
+    // apply for memory
+    cudaMallocManaged((void**)&A, sizeof(Matrix));
+    cudaMallocManaged((void**)&B, sizeof(Matrix));
+    int nBytes = width * height * sizeof(bool);
+    cudaMallocManaged((void**)&A->elements, nBytes);
+    cudaMallocManaged((void**)&B->elements, nBytes);
 
-    // Set up SFML window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "CUDA + SFML");
-
-    // Visualization of result (as simple bars for each value in C)
-    sf::VertexArray bars(sf::Lines, N * 2);
-    float max_value = *std::max_element(C.begin(), C.end());
-    for (int i = 0; i < N; ++i) {
-        bars[i * 2].position = sf::Vector2f(i * 8, 300); // Starting point
-        bars[i * 2].color = sf::Color::Red;
-        bars[i * 2 + 1].position = sf::Vector2f(i * 8, 300 - (C[i] / max_value) * 300); // Scaled height
-        bars[i * 2 + 1].color = sf::Color::Red;
+    // initialize matrix
+    A->width = width;
+    A->height = height;
+    B->width = width;
+    B->height = height;
+    for (int i = 0; i < width * height; ++i) {
+        A->elements[i] = rand() % 2;
+        B->elements[i] = A->elements[i];
     }
 
-    std::cout << "Displaying Results..." << std::endl;
-        for (int i = 0; i < 10; ++i) {
-            std::cout << "C[" << i << "] = " << C[i] << std::endl;
-        }
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+    // Perform CUDA vector operation
+    dim3 blockSize(32, 32);
+    dim3 gridSize((width + blockSize.x - 1) / blockSize.x, 
+        (height + blockSize.y - 1) / blockSize.y);
 
-        window.clear();
-        window.draw(bars);
-        window.display();
+    // Set up SFML window
+    sf::VideoMode vm(windowWidth, windowHeight);
+    sf::RenderWindow window(vm, "CUDA + SFML");
+
+    // Visualization of result 
+    Grid grid(width, height, A);
+    
+    while (window.isOpen()) {
+        auto event = sf::Event{};
+        while( window.pollEvent(event)){
+            //close the window
+            if (event.type == sf::Event::KeyReleased){
+                // close the window
+                if ( sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+                {
+                    window.close();
+                }
+            }
+            if (event.type == sf::Event::Closed){
+                window.close();
+            }
+        }
+        // swap A and B every loop
+        matMulKernel(A, B, width, height);
+
+        // synchronize
+        cudaDeviceSynchronize();
+        
+        // update the living status of the blocks
+        grid.updateLivingStatus(A, B);
+
+        // show the grid
+        grid.showGrid(window);
+
+        // swap A and B every loop
+        matMulKernel(B, A, width, height);
+
+        grid.updateLivingStatus(B, A);
+
+        // synchronize
+        cudaDeviceSynchronize();
+
+        // show the grid
+        grid.showGrid(window);
     }
 
     return 0;

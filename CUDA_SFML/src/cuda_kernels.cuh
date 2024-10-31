@@ -2,6 +2,5 @@
 #ifndef CUDA_KERNELS_H
 #define CUDA_KERNELS_H
 
-void vectorAdd(const float* A, const float* B, float* C, int N);
-
+void matMulKernel(const Matrix* A, const Matrix* B, int width, int height);
 #endif

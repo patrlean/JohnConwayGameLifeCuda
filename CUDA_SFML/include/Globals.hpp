@@ -14,8 +14,8 @@ This is the header file of Globals.cpp.
 #include <string>
 
 // Scene settings
-extern int verticalBlockNumbers;
-extern int horizontalBlockNumbers;
+extern int width;
+extern int height;
 
 // Block settings
 extern int cellSize;
