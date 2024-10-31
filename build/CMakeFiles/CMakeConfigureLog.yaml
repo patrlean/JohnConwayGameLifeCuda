@@ -1561,3 +1561,42 @@ events:
       
       
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCSourceCompiles.cmake:76 (cmake_check_source_compiles)"
+      - "/usr/share/cmake/Modules/FindThreads.cmake:97 (CHECK_C_SOURCE_COMPILES)"
+      - "/usr/share/cmake/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "/usr/share/cmake/Modules/FindCUDA.cmake:1049 (find_package)"
+      - "CMakeLists.txt:30 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/CMakeFiles/CMakeScratch/TryCompile-j3yBLr"
+      binary: "/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/CMakeFiles/CMakeScratch/TryCompile-j3yBLr"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: "13.0"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/CMakeFiles/CMakeScratch/TryCompile-j3yBLr
+        
+        Run Build Command(s):/usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_0b79c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_0b79c.dir/build.make CMakeFiles/cmTC_0b79c.dir/build
+        gmake[1]: Entering directory '/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/CMakeFiles/CMakeScratch/TryCompile-j3yBLr'
+        Building C object CMakeFiles/cmTC_0b79c.dir/src.c.o
+        /usr/local/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/gcc -DCMAKE_HAVE_LIBC_PTHREAD  -fPIC  -o CMakeFiles/cmTC_0b79c.dir/src.c.o -c /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/CMakeFiles/CMakeScratch/TryCompile-j3yBLr/src.c
+        Linking C executable cmTC_0b79c
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0b79c.dir/link.txt --verbose=1
+        /usr/local/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/gcc -fPIC  CMakeFiles/cmTC_0b79c.dir/src.c.o -o cmTC_0b79c 
+        gmake[1]: Leaving directory '/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/CMakeFiles/CMakeScratch/TryCompile-j3yBLr'
+        
+      exitCode: 0
+...

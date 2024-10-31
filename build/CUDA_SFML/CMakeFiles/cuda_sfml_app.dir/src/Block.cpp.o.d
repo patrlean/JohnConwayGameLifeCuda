@@ -1,6 +1,7 @@
-CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/main.cpp.o: \
- /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/src/main.cpp \
+CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/Block.cpp.o: \
+ /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/src/Block.cpp \
  /usr/include/stdc-predef.h \
+ /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/include/Block.hpp \
  /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/../SFML/include/SFML/Graphics.hpp \
  /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/../SFML/include/SFML/Window.hpp \
  /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/../SFML/include/SFML/System.hpp \
@@ -253,34 +254,7 @@ CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/main.cpp.o: \
  /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/../SFML/include/SFML/Graphics/Sprite.hpp \
  /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/../SFML/include/SFML/Graphics/Text.hpp \
  /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/../SFML/include/SFML/Graphics/VertexBuffer.hpp \
- /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/src/cuda_kernels.cuh \
- /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/include/matrix.hpp \
- /usr/local/cuda/include/cuda_runtime.h \
- /usr/local/cuda/include/crt/host_config.h \
- /usr/local/cuda/include/builtin_types.h \
- /usr/local/cuda/include/device_types.h \
- /usr/local/cuda/include/crt/host_defines.h \
- /usr/local/cuda/include/driver_types.h \
- /usr/local/cuda/include/vector_types.h \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/include-fixed/limits.h \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/include-fixed/syslimits.h \
- /usr/include/limits.h /usr/include/bits/posix1_lim.h \
- /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
- /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
- /usr/include/bits/uio_lim.h /usr/local/cuda/include/surface_types.h \
- /usr/local/cuda/include/texture_types.h \
- /usr/local/cuda/include/library_types.h \
- /usr/local/cuda/include/channel_descriptor.h \
- /usr/local/cuda/include/cuda_runtime_api.h \
- /usr/local/cuda/include/cuda_device_runtime_api.h \
- /usr/local/cuda/include/driver_functions.h \
- /usr/local/cuda/include/vector_functions.h \
- /usr/local/cuda/include/vector_functions.hpp \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/utility \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/bits/stl_relops.h \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/iostream \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/istream \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/bits/istream.tcc \
+ /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/include/Globals.hpp \
  /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/random \
  /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/cmath \
  /usr/include/math.h /usr/include/bits/math-vector.h \
@@ -310,17 +284,4 @@ CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/src/main.cpp.o: \
  /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/numeric \
  /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/bits/stl_numeric.h \
  /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/bit \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/pstl/glue_numeric_defs.h \
- /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/include/Globals.hpp \
- /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/include/Grid.hpp \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/thread \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/bits/std_thread.h \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/bits/unique_ptr.h \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/bits/this_thread_sleep.h \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/bits/chrono.h \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/ratio \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/bits/parse_numbers.h \
- /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/include/Block.hpp \
- /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/include/Globals.hpp \
- /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/include/matrix.hpp \
- /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/include/omp.h
+ /storage/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-11.3.1/gcc-12.3.0-ukkkutsxfl5kpnnaxflpkq2jtliwthfz/bin/../lib/gcc/x86_64-pc-linux-gnu/12.3.0/../../../../include/c++/12.3.0/pstl/glue_numeric_defs.h

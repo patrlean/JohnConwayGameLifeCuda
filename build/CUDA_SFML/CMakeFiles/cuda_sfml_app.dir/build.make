@@ -176,6 +176,8 @@ output/bin/cuda_sfml_app: CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/build.make
 output/bin/cuda_sfml_app: output/lib/libsfml-graphics.so.2.6.1
 output/bin/cuda_sfml_app: output/lib/libsfml-window.so.2.6.1
 output/bin/cuda_sfml_app: output/lib/libsfml-system.so.2.6.1
+output/bin/cuda_sfml_app: /usr/local/cuda/lib64/libcudart_static.a
+output/bin/cuda_sfml_app: /usr/lib64/librt.a
 output/bin/cuda_sfml_app: CUDA_SFML/CMakeFiles/cuda_sfml_app.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable ../output/bin/cuda_sfml_app"
 	cd /home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/build/CUDA_SFML && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cuda_sfml_app.dir/link.txt --verbose=$(VERBOSE)

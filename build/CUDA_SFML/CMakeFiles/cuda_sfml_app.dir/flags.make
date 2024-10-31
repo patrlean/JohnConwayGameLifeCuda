@@ -11,7 +11,7 @@ CUDA_FLAGS = -std=c++11 --generate-code=arch=compute_50,code=[compute_50,sm_50] 
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/../SFML/include -I/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/include -I/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/SFML/include
+CXX_INCLUDES = -I/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/../SFML/include -I/usr/local/cuda/include -I/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/CUDA_SFML/include -I/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/SFML/include
 
 CXX_FLAGS = -std=gnu++17
 
