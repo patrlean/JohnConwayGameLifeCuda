@@ -8,7 +8,7 @@ __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
     int index = row * width + col;
-    printf(" thread x index is %d\n", threadIdx.x);
+    // printf(" thread x index is %d\n", threadIdx.x);
     // print element
     if (row == 400 && col == 200){
        printf("element is %d\n", A -> elements[index]);
@@ -26,6 +26,13 @@ __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
             setElement(B, row, col, false);
         }
     }
+}
+
+void launchMatMulKernel(Matrix* A, Matrix* B, int width, int height) {
+    dim3 blockSize(32, 32);
+    dim3 gridSize((width + blockSize.x - 1) / blockSize.x, 
+        (height + blockSize.y - 1) / blockSize.y);
+    matMulKernel<<<gridSize, blockSize>>>(A, B, width, height)
 }
 
 
