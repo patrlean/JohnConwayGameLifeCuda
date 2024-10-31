@@ -1,6 +1,5 @@
 // cuda_kernels.cu
 #include "cuda_kernels.cuh"
-#include <cuda_runtime.h>
 #include <iostream>
 
 __global__ void matMulKernel(const Matrix* A, const Matrix* B, int width, int height) {

@@ -3,11 +3,11 @@
 if("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 2.8)
    message(FATAL_ERROR "CMake >= 2.8.0 required")
 endif()
-if(CMAKE_VERSION VERSION_LESS "3.0.0")
-   message(FATAL_ERROR "CMake >= 3.0.0 required")
+if(CMAKE_VERSION VERSION_LESS "2.8.3")
+   message(FATAL_ERROR "CMake >= 2.8.3 required")
 endif()
 cmake_policy(PUSH)
-cmake_policy(VERSION 3.0.0...3.28)
+cmake_policy(VERSION 2.8.3...3.24)
 #----------------------------------------------------------------
 # Generated CMake target import file.
 #----------------------------------------------------------------
@@ -15,11 +15,15 @@ cmake_policy(VERSION 3.0.0...3.28)
 # Commands may need to know the format version.
 set(CMAKE_IMPORT_FILE_VERSION 1)
 
+if(CMAKE_VERSION VERSION_LESS 3.0.0)
+  message(FATAL_ERROR "This file relies on consumers using CMake 3.0.0 or greater.")
+endif()
+
 # Protect against multiple inclusion, which would fail when already imported targets are added once more.
 set(_cmake_targets_defined "")
 set(_cmake_targets_not_defined "")
 set(_cmake_expected_targets "")
-foreach(_cmake_expected_target IN ITEMS sfml-system sfml-main sfml-window OpenGL sfml-network sfml-graphics Freetype VORBIS FLAC sfml-audio)
+foreach(_cmake_expected_target IN ITEMS sfml-system sfml-window X11 OpenGL UDev sfml-network sfml-graphics Freetype)
   list(APPEND _cmake_expected_targets "${_cmake_expected_target}")
   if(TARGET "${_cmake_expected_target}")
     list(APPEND _cmake_targets_defined "${_cmake_expected_target}")
@@ -50,36 +54,46 @@ unset(_cmake_expected_targets)
 add_library(sfml-system SHARED IMPORTED)
 
 set_target_properties(sfml-system PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/include"
-)
-
-# Create imported target sfml-main
-add_library(sfml-main STATIC IMPORTED)
-
-set_target_properties(sfml-main PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/include"
+  INTERFACE_INCLUDE_DIRECTORIES "/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/SFML/include"
 )
 
 # Create imported target sfml-window
 add_library(sfml-window SHARED IMPORTED)
 
 set_target_properties(sfml-window PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/include"
+  INTERFACE_INCLUDE_DIRECTORIES "/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/SFML/include"
   INTERFACE_LINK_LIBRARIES "sfml-system"
+)
+
+# Create imported target X11
+add_library(X11 INTERFACE IMPORTED)
+
+set_target_properties(X11 PROPERTIES
+  INTERFACE_INCLUDE_DIRECTORIES "/usr/include"
+  INTERFACE_LINK_LIBRARIES "/usr/lib64/libX11.so;/usr/lib64/libXrandr.so;/usr/lib64/libXcursor.so"
 )
 
 # Create imported target OpenGL
 add_library(OpenGL INTERFACE IMPORTED)
 
 set_target_properties(OpenGL PROPERTIES
-  INTERFACE_LINK_LIBRARIES "opengl32"
+  INTERFACE_INCLUDE_DIRECTORIES "/usr/include"
+  INTERFACE_LINK_LIBRARIES "/usr/lib64/libGL.so"
+)
+
+# Create imported target UDev
+add_library(UDev INTERFACE IMPORTED)
+
+set_target_properties(UDev PROPERTIES
+  INTERFACE_INCLUDE_DIRECTORIES "/usr/include"
+  INTERFACE_LINK_LIBRARIES "/usr/lib64/libudev.so"
 )
 
 # Create imported target sfml-network
 add_library(sfml-network SHARED IMPORTED)
 
 set_target_properties(sfml-network PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/include"
+  INTERFACE_INCLUDE_DIRECTORIES "/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/SFML/include"
   INTERFACE_LINK_LIBRARIES "sfml-system"
 )
 
@@ -87,7 +101,7 @@ set_target_properties(sfml-network PROPERTIES
 add_library(sfml-graphics SHARED IMPORTED)
 
 set_target_properties(sfml-graphics PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/include"
+  INTERFACE_INCLUDE_DIRECTORIES "/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/SFML/include"
   INTERFACE_LINK_LIBRARIES "sfml-window"
 )
 
@@ -95,206 +109,36 @@ set_target_properties(sfml-graphics PROPERTIES
 add_library(Freetype INTERFACE IMPORTED)
 
 set_target_properties(Freetype PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/extlibs/headers/freetype2"
-  INTERFACE_LINK_LIBRARIES "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/extlibs/libs-msvc-universal/x64/freetype.lib"
+  INTERFACE_INCLUDE_DIRECTORIES "/usr/include/freetype2"
+  INTERFACE_LINK_LIBRARIES "/usr/lib64/libfreetype.so"
 )
-
-# Create imported target VORBIS
-add_library(VORBIS INTERFACE IMPORTED)
-
-set_target_properties(VORBIS PROPERTIES
-  INTERFACE_COMPILE_DEFINITIONS "OV_EXCLUDE_STATIC_CALLBACKS"
-  INTERFACE_INCLUDE_DIRECTORIES "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/extlibs/headers;E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/extlibs/headers"
-  INTERFACE_LINK_LIBRARIES "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/extlibs/libs-msvc-universal/x64/vorbisenc.lib;E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/extlibs/libs-msvc-universal/x64/vorbisfile.lib;E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/extlibs/libs-msvc-universal/x64/vorbis.lib;E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/extlibs/libs-msvc-universal/x64/ogg.lib"
-)
-
-# Create imported target FLAC
-add_library(FLAC INTERFACE IMPORTED)
-
-set_target_properties(FLAC PROPERTIES
-  INTERFACE_COMPILE_DEFINITIONS "FLAC__NO_DLL"
-  INTERFACE_INCLUDE_DIRECTORIES "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/extlibs/headers"
-  INTERFACE_LINK_LIBRARIES "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/extlibs/libs-msvc-universal/x64/flac.lib"
-)
-
-# Create imported target sfml-audio
-add_library(sfml-audio SHARED IMPORTED)
-
-set_target_properties(sfml-audio PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/include"
-  INTERFACE_LINK_LIBRARIES "sfml-system"
-)
-
-# Import target "sfml-system" for configuration "Debug"
-set_property(TARGET sfml-system APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
-set_target_properties(sfml-system PROPERTIES
-  IMPORTED_IMPLIB_DEBUG "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Debug/sfml-system-d.lib"
-  IMPORTED_LOCATION_DEBUG "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Debug/sfml-system-d-2.dll"
-  )
-
-# Import target "sfml-main" for configuration "Debug"
-set_property(TARGET sfml-main APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
-set_target_properties(sfml-main PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "CXX"
-  IMPORTED_LOCATION_DEBUG "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Debug/sfml-main-d.lib"
-  )
-
-# Import target "sfml-window" for configuration "Debug"
-set_property(TARGET sfml-window APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
-set_target_properties(sfml-window PROPERTIES
-  IMPORTED_IMPLIB_DEBUG "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Debug/sfml-window-d.lib"
-  IMPORTED_LOCATION_DEBUG "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Debug/sfml-window-d-2.dll"
-  )
-
-# Import target "sfml-network" for configuration "Debug"
-set_property(TARGET sfml-network APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
-set_target_properties(sfml-network PROPERTIES
-  IMPORTED_IMPLIB_DEBUG "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Debug/sfml-network-d.lib"
-  IMPORTED_LOCATION_DEBUG "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Debug/sfml-network-d-2.dll"
-  )
-
-# Import target "sfml-graphics" for configuration "Debug"
-set_property(TARGET sfml-graphics APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
-set_target_properties(sfml-graphics PROPERTIES
-  IMPORTED_IMPLIB_DEBUG "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Debug/sfml-graphics-d.lib"
-  IMPORTED_LOCATION_DEBUG "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Debug/sfml-graphics-d-2.dll"
-  )
-
-# Import target "sfml-audio" for configuration "Debug"
-set_property(TARGET sfml-audio APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
-set_target_properties(sfml-audio PROPERTIES
-  IMPORTED_IMPLIB_DEBUG "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Debug/sfml-audio-d.lib"
-  IMPORTED_LINK_DEPENDENT_LIBRARIES_DEBUG "OpenAL::OpenAL"
-  IMPORTED_LOCATION_DEBUG "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Debug/sfml-audio-d-2.dll"
-  )
 
 # Import target "sfml-system" for configuration "Release"
 set_property(TARGET sfml-system APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(sfml-system PROPERTIES
-  IMPORTED_IMPLIB_RELEASE "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Release/sfml-system.lib"
-  IMPORTED_LOCATION_RELEASE "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Release/sfml-system-2.dll"
-  )
-
-# Import target "sfml-main" for configuration "Release"
-set_property(TARGET sfml-main APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(sfml-main PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Release/sfml-main.lib"
+  IMPORTED_LOCATION_RELEASE "/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/SFML/build/lib/libsfml-system.so.2.6.1"
+  IMPORTED_SONAME_RELEASE "libsfml-system.so.2.6"
   )
 
 # Import target "sfml-window" for configuration "Release"
 set_property(TARGET sfml-window APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(sfml-window PROPERTIES
-  IMPORTED_IMPLIB_RELEASE "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Release/sfml-window.lib"
-  IMPORTED_LOCATION_RELEASE "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Release/sfml-window-2.dll"
+  IMPORTED_LOCATION_RELEASE "/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/SFML/build/lib/libsfml-window.so.2.6.1"
+  IMPORTED_SONAME_RELEASE "libsfml-window.so.2.6"
   )
 
 # Import target "sfml-network" for configuration "Release"
 set_property(TARGET sfml-network APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(sfml-network PROPERTIES
-  IMPORTED_IMPLIB_RELEASE "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Release/sfml-network.lib"
-  IMPORTED_LOCATION_RELEASE "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Release/sfml-network-2.dll"
+  IMPORTED_LOCATION_RELEASE "/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/SFML/build/lib/libsfml-network.so.2.6.1"
+  IMPORTED_SONAME_RELEASE "libsfml-network.so.2.6"
   )
 
 # Import target "sfml-graphics" for configuration "Release"
 set_property(TARGET sfml-graphics APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(sfml-graphics PROPERTIES
-  IMPORTED_IMPLIB_RELEASE "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Release/sfml-graphics.lib"
-  IMPORTED_LOCATION_RELEASE "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Release/sfml-graphics-2.dll"
-  )
-
-# Import target "sfml-audio" for configuration "Release"
-set_property(TARGET sfml-audio APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(sfml-audio PROPERTIES
-  IMPORTED_IMPLIB_RELEASE "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Release/sfml-audio.lib"
-  IMPORTED_LINK_DEPENDENT_LIBRARIES_RELEASE "OpenAL::OpenAL"
-  IMPORTED_LOCATION_RELEASE "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/Release/sfml-audio-2.dll"
-  )
-
-# Import target "sfml-system" for configuration "MinSizeRel"
-set_property(TARGET sfml-system APPEND PROPERTY IMPORTED_CONFIGURATIONS MINSIZEREL)
-set_target_properties(sfml-system PROPERTIES
-  IMPORTED_IMPLIB_MINSIZEREL "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/MinSizeRel/sfml-system.lib"
-  IMPORTED_LOCATION_MINSIZEREL "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/MinSizeRel/sfml-system-2.dll"
-  )
-
-# Import target "sfml-main" for configuration "MinSizeRel"
-set_property(TARGET sfml-main APPEND PROPERTY IMPORTED_CONFIGURATIONS MINSIZEREL)
-set_target_properties(sfml-main PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_MINSIZEREL "CXX"
-  IMPORTED_LOCATION_MINSIZEREL "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/MinSizeRel/sfml-main.lib"
-  )
-
-# Import target "sfml-window" for configuration "MinSizeRel"
-set_property(TARGET sfml-window APPEND PROPERTY IMPORTED_CONFIGURATIONS MINSIZEREL)
-set_target_properties(sfml-window PROPERTIES
-  IMPORTED_IMPLIB_MINSIZEREL "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/MinSizeRel/sfml-window.lib"
-  IMPORTED_LOCATION_MINSIZEREL "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/MinSizeRel/sfml-window-2.dll"
-  )
-
-# Import target "sfml-network" for configuration "MinSizeRel"
-set_property(TARGET sfml-network APPEND PROPERTY IMPORTED_CONFIGURATIONS MINSIZEREL)
-set_target_properties(sfml-network PROPERTIES
-  IMPORTED_IMPLIB_MINSIZEREL "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/MinSizeRel/sfml-network.lib"
-  IMPORTED_LOCATION_MINSIZEREL "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/MinSizeRel/sfml-network-2.dll"
-  )
-
-# Import target "sfml-graphics" for configuration "MinSizeRel"
-set_property(TARGET sfml-graphics APPEND PROPERTY IMPORTED_CONFIGURATIONS MINSIZEREL)
-set_target_properties(sfml-graphics PROPERTIES
-  IMPORTED_IMPLIB_MINSIZEREL "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/MinSizeRel/sfml-graphics.lib"
-  IMPORTED_LOCATION_MINSIZEREL "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/MinSizeRel/sfml-graphics-2.dll"
-  )
-
-# Import target "sfml-audio" for configuration "MinSizeRel"
-set_property(TARGET sfml-audio APPEND PROPERTY IMPORTED_CONFIGURATIONS MINSIZEREL)
-set_target_properties(sfml-audio PROPERTIES
-  IMPORTED_IMPLIB_MINSIZEREL "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/MinSizeRel/sfml-audio.lib"
-  IMPORTED_LINK_DEPENDENT_LIBRARIES_MINSIZEREL "OpenAL::OpenAL"
-  IMPORTED_LOCATION_MINSIZEREL "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/MinSizeRel/sfml-audio-2.dll"
-  )
-
-# Import target "sfml-system" for configuration "RelWithDebInfo"
-set_property(TARGET sfml-system APPEND PROPERTY IMPORTED_CONFIGURATIONS RELWITHDEBINFO)
-set_target_properties(sfml-system PROPERTIES
-  IMPORTED_IMPLIB_RELWITHDEBINFO "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/RelWithDebInfo/sfml-system.lib"
-  IMPORTED_LOCATION_RELWITHDEBINFO "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/RelWithDebInfo/sfml-system-2.dll"
-  )
-
-# Import target "sfml-main" for configuration "RelWithDebInfo"
-set_property(TARGET sfml-main APPEND PROPERTY IMPORTED_CONFIGURATIONS RELWITHDEBINFO)
-set_target_properties(sfml-main PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELWITHDEBINFO "CXX"
-  IMPORTED_LOCATION_RELWITHDEBINFO "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/RelWithDebInfo/sfml-main.lib"
-  )
-
-# Import target "sfml-window" for configuration "RelWithDebInfo"
-set_property(TARGET sfml-window APPEND PROPERTY IMPORTED_CONFIGURATIONS RELWITHDEBINFO)
-set_target_properties(sfml-window PROPERTIES
-  IMPORTED_IMPLIB_RELWITHDEBINFO "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/RelWithDebInfo/sfml-window.lib"
-  IMPORTED_LOCATION_RELWITHDEBINFO "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/RelWithDebInfo/sfml-window-2.dll"
-  )
-
-# Import target "sfml-network" for configuration "RelWithDebInfo"
-set_property(TARGET sfml-network APPEND PROPERTY IMPORTED_CONFIGURATIONS RELWITHDEBINFO)
-set_target_properties(sfml-network PROPERTIES
-  IMPORTED_IMPLIB_RELWITHDEBINFO "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/RelWithDebInfo/sfml-network.lib"
-  IMPORTED_LOCATION_RELWITHDEBINFO "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/RelWithDebInfo/sfml-network-2.dll"
-  )
-
-# Import target "sfml-graphics" for configuration "RelWithDebInfo"
-set_property(TARGET sfml-graphics APPEND PROPERTY IMPORTED_CONFIGURATIONS RELWITHDEBINFO)
-set_target_properties(sfml-graphics PROPERTIES
-  IMPORTED_IMPLIB_RELWITHDEBINFO "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/RelWithDebInfo/sfml-graphics.lib"
-  IMPORTED_LOCATION_RELWITHDEBINFO "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/RelWithDebInfo/sfml-graphics-2.dll"
-  )
-
-# Import target "sfml-audio" for configuration "RelWithDebInfo"
-set_property(TARGET sfml-audio APPEND PROPERTY IMPORTED_CONFIGURATIONS RELWITHDEBINFO)
-set_target_properties(sfml-audio PROPERTIES
-  IMPORTED_IMPLIB_RELWITHDEBINFO "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/RelWithDebInfo/sfml-audio.lib"
-  IMPORTED_LINK_DEPENDENT_LIBRARIES_RELWITHDEBINFO "OpenAL::OpenAL"
-  IMPORTED_LOCATION_RELWITHDEBINFO "E:/master/6122/LAB/LAB1/cmake-sfml-project/SFML/build/lib/RelWithDebInfo/sfml-audio-2.dll"
+  IMPORTED_LOCATION_RELEASE "/home/hice1/tzhao348/6122/LAB4/JohnConwayGameLifeCuda/SFML/build/lib/libsfml-graphics.so.2.6.1"
+  IMPORTED_SONAME_RELEASE "libsfml-graphics.so.2.6"
   )
 
 # This file does not depend on other imported targets which have

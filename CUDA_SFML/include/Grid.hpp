@@ -16,7 +16,7 @@ Some header files are included.
 
 #include "Block.hpp"
 #include "Globals.hpp"
-#include "Matrix.hpp"
+#include "matrix.hpp"
 #include <omp.h>
 #include <iostream>
 

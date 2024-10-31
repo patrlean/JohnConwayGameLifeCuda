@@ -15,6 +15,9 @@ include_directories(${PROJECT_SOURCE_DIR}/../SFML/include)
 
 link_directories(${PROJECT_SOURCE_DIR}/../SFML/lib)
 
+# Include hpp
+include_directories(include)
+
 # Set CUDA architecture
 #set(CUDA_ARCHITECTURES 52)
 
@@ -24,9 +27,14 @@ add_executable(cuda_sfml_app
     src/cuda_kernels.cu 
     src/parameterParse.cpp 
     src/Globals.cpp
+    src/Grid.cpp
+    src/Block.cpp
 
     include/parameterParse.hpp
     include/Globals.hpp
+    include/Grid.hpp
+    include/Block.hpp
+    include/matrix.hpp
     )
 
 # Link SFML libraries
