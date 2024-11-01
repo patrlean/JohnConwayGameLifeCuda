@@ -4,6 +4,7 @@
 
 #include "matrix.hpp"
 #include <cuda_runtime.h>
+#include <string>
 
 __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height);
 

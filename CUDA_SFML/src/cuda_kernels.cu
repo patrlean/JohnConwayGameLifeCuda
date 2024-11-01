@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdio.h>
 
+
 // Kernel for normal memory mode
 __global__ void matMulKernelNormal(bool* A, bool* B, int width, int height) {
     int row = blockIdx.y * blockDim.y + threadIdx.y;
