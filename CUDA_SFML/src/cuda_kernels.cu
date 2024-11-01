@@ -56,7 +56,7 @@ __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
     // now matrix B is the next frame
 }
 
-void launchMatMulKernel(Matrix* A, Matrix* B, int width, int height, std::string processingType) {
+void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, int height, std::string processingType) {
     int blockDim = (int)sqrt(numThreads);
     dim3 blockSize(blockDim, blockDim);
     dim3 gridSize((width + blockSize.x - 1) / blockSize.x, 
@@ -64,9 +64,6 @@ void launchMatMulKernel(Matrix* A, Matrix* B, int width, int height, std::string
 
     if( processingType == "NORMAL" ){
         // copy data to device  
-        bool *d_A, *d_B;
-        cudaMalloc((void**)&d_A, width * height * sizeof(bool));
-        cudaMalloc((void**)&d_B, width * height * sizeof(bool));
 
         // A is the current frame
         cudaMemcpy(d_A, A->elements, width * height * sizeof(bool), cudaMemcpyHostToDevice);

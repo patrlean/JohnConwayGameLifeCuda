@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
         }
         auto startTime = std::chrono::high_resolution_clock::now();
         // swap A and B every loop
-        launchMatMulKernel(A, B, width, height, processingType);
+        launchMatMulKernel(A, B, d_A, d_B, width, height, processingType);
         // now matrix B is the next frame
         // synchronize
         cudaDeviceSynchronize();
@@ -111,7 +111,7 @@ int main(int argc, char *argv[]) {
   
         auto startTime2 = std::chrono::high_resolution_clock::now();
         // swap A and B every loop
-        launchMatMulKernel(B, A, width, height, processingType);
+        launchMatMulKernel(B, A, d_A, d_B, width, height, processingType);
         // synchronize
         cudaDeviceSynchronize();
         auto endTime = std::chrono::high_resolution_clock::now();
