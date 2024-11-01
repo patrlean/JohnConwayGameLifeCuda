@@ -34,12 +34,12 @@ void parseArgs(int argc, char *argv[])
         } else if (arg == "-t" && i + 1 < argc) {
             processingType = argv[++i];
             // check processingType valid?
-            if (processingType != "SEQ" && processingType != "THRD" && processingType != "OMP") {
-                cerr << "Error: Invalid processing type. Must be one of SEQ, THRD, OMP." << endl;
+            if (processingType != "NORMAL" && processingType != "PINNED" && processingType != "MANAGED") {
+                cerr << "Error: Invalid processing type. Must be one of NORMAL, PINNED, MANAGED." << endl;
                 exit(EXIT_FAILURE);  // exit
             }
         } else {
-            cerr << "Usage: " << argv[0] << " [-n numThreads] [-c cellSize] [-x windowWidth] [-y windowHeight] [-t processingType]" << endl;
+            cerr << "Usage: " << argv[0] << " [-n numThreads] [-c cellSize] [-x windowWidth] [-y windowHeight] [-t typeOfMemory]" << endl;
             exit(EXIT_FAILURE);
         }
     }

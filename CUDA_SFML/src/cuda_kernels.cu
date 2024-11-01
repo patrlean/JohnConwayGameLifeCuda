@@ -3,6 +3,37 @@
 #include <iostream>
 #include <stdio.h>
 
+// Kernel for normal memory mode
+__global__ void matMulKernelNormal(bool* A, bool* B, int width, int height) {
+    int row = blockIdx.y * blockDim.y + threadIdx.y;
+    int col = blockIdx.x * blockDim.x + threadIdx.x;
+    int index = row * width + col;
+    
+    if (row < height && col < width) {
+        int count = 0;
+        // Count alive neighbors
+        for(int i = -1; i <= 1; i++) {
+            for(int j = -1; j <= 1; j++) {
+                if(i == 0 && j == 0) continue;
+                int newRow = row + i;
+                int newCol = col + j;
+                if(newRow >= 0 && newRow < height && newCol >= 0 && newCol < width) {
+                    if(A[newRow * width + newCol]) count++;
+                }
+            }
+        }
+        
+        // Apply rules
+        if(count == 3) {
+            B[index] = true;
+        } else if(count == 2 && A[index]) {
+            B[index] = true;
+        } else {
+            B[index] = false;
+        }
+    }
+}
+
 __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
     // get position of current thread
     int row = blockIdx.y * blockDim.y + threadIdx.y;
@@ -24,11 +55,27 @@ __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
     // now matrix B is the next frame
 }
 
-void launchMatMulKernel(Matrix* A, Matrix* B, int width, int height) {
+void launchMatMulKernel(Matrix* A, Matrix* B, int width, int height, std::string processingType) {
     dim3 blockSize(32, 32);
     dim3 gridSize((width + blockSize.x - 1) / blockSize.x, 
         (height + blockSize.y - 1) / blockSize.y);
-    matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
+
+    if( processingType == "NORMAL" ){
+        // copy data to device  
+        bool *d_A, *d_B;
+        cudaMalloc((void**)&d_A, width * height * sizeof(bool));
+        cudaMalloc((void**)&d_B, width * height * sizeof(bool));
+
+        // A is the current frame
+        cudaMemcpy(d_A, A->elements, width * height * sizeof(bool), cudaMemcpyHostToDevice);
+
+        matMulKernelNormal<<<gridSize, blockSize>>>(d_A, d_B, width, height);
+
+        // copy data to host
+        cudaMemcpy(B->elements, d_B, width * height * sizeof(bool), cudaMemcpyDeviceToHost);
+    }else{
+        matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
+    }
 }
 
 

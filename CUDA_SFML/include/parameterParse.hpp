@@ -7,5 +7,5 @@
 #include "Globals.hpp"
 using namespace std;
 
-
+void parseArgs(int argc, char *argv[]);
 #endif
