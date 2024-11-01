@@ -13,9 +13,9 @@ __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
     if (row < height && col < width) {
         int aliveNeighbors = countAliveMembers(A, row, col);
         // check rules and generate matrix after update
-        if( aliveNeighbors == 3 && !A->elements[index]){
+        if( aliveNeighbors == 3){
             setElement(B, row, col, true);
-        }else if( (aliveNeighbors != 2 && aliveNeighbors != 3) && A->elements[index]){
+        }else if( aliveNeighbors == 2 && A->elements[index]){
             setElement(B, row, col, true);
         }else{
             setElement(B, row, col, false);
