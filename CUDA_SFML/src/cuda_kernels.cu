@@ -57,7 +57,7 @@ __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
 }
 
 void launchMatMulKernel(Matrix* A, Matrix* B, int width, int height, std::string processingType) {
-    int blockDim = (int)sqrt(threadsPerBlock);
+    int blockDim = (int)sqrt(numThreads);
     dim3 blockSize(blockDim, blockDim);
     dim3 gridSize((width + blockSize.x - 1) / blockSize.x, 
         (height + blockSize.y - 1) / blockSize.y);
