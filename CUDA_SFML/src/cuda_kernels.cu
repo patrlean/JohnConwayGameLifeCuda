@@ -57,7 +57,8 @@ __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
 }
 
 void launchMatMulKernel(Matrix* A, Matrix* B, int width, int height, std::string processingType) {
-    dim3 blockSize(32, 32);
+    int blockDim = (int)sqrt(threadsPerBlock);
+    dim3 blockSize(blockDim, blockDim);
     dim3 gridSize((width + blockSize.x - 1) / blockSize.x, 
         (height + blockSize.y - 1) / blockSize.y);
 
@@ -74,6 +75,10 @@ void launchMatMulKernel(Matrix* A, Matrix* B, int width, int height, std::string
 
         // copy data to host
         cudaMemcpy(B->elements, d_B, width * height * sizeof(bool), cudaMemcpyDeviceToHost);
+
+        // free device memory
+        cudaFree(d_A);
+        cudaFree(d_B);
     }else{
         matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
     }
