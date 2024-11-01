@@ -77,7 +77,7 @@ int main() {
 	// synchronize
         cudaDeviceSynchronize();
 
-        grid.updateLivingStatus(B, A);
+        grid.updateLivingStatus(A);
 
         // show the grid
         grid.showGrid(window);
