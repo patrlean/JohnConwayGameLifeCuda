@@ -28,43 +28,9 @@ Grid::Grid(int rows, int cols, Matrix *matrix){
     }
 };
 
-    
-
-// update the living status of the block by the rule
-// @input: aliveNeighbors - the number of alive neighbors
-// @input: isAlive - the living status of the block
-// @return the living status of the block after update
-bool Grid::updateByRule(int aliveNeighbors, bool isAlive){
-    if( aliveNeighbors == 3 && !isAlive){
-        return true;
-    }else if( (aliveNeighbors != 2 && aliveNeighbors != 3) && isAlive){
-        return true;
-    }else{
-        return false;
-    }
-}
-
-// generate the living status of the blocks for a range 
-// use for parallel
-// @input: startRow - the start row of the range
-// @input: endRow - the end row of the range
-// void Grid::generateLivingStatusForRange(int startRow, int endRow) {
-//     int aliveNeighbors = 0;
-//     for (int row_idx = startRow; row_idx < endRow; row_idx++) {
-//         for (int col_idx = 0; col_idx < cols; col_idx++) {
-//             auto &block = blocks[row_idx][col_idx];
-//             // count the number of alive neighbors
-//             aliveNeighbors = countAliveNeighbors(row_idx, col_idx);
-//             // update the living status of the block
-//             block.isUpdated = updateByRule(aliveNeighbors, block.isAlive);
-//         }
-//     }
-// }
-
-
 // update the block status and set the color
 // @input: grid - the grid of the game
-void Grid::updateLivingStatus(Matrix *matrix, Matrix *updatedMatrix){
+void Grid::updateLivingStatus(Matrix *matrix){
     int row_idx = 0;    
     int col_idx = 0;
     for( auto &row : this -> blocks){
@@ -75,7 +41,7 @@ void Grid::updateLivingStatus(Matrix *matrix, Matrix *updatedMatrix){
             // true ^ true == false
             // false ^ true == true
             // true ^ false == true
-            block.isAlive = matrix->elements[row_idx * cols + col_idx] ^ updatedMatrix->elements[row_idx * cols + col_idx];
+            block.isAlive = matrix->elements[row_idx * cols + col_idx];
 	    
             // set color
             if( block.isAlive){
@@ -90,32 +56,6 @@ void Grid::updateLivingStatus(Matrix *matrix, Matrix *updatedMatrix){
         }
         row_idx++;
     }
-}
-
-// count the number of alive neighbors
-// @input: grid - the grid of the game
-// @input: x - the x coordinate of the block
-// @input: y - the y coordinate of the block
-// @return the number of alive neighbors
-int Grid::countAliveNeighbors(int x, int y){
-    int count = 0;
-    // count eight neighbors
-    for( int i = -1; i <= 1; i++){
-        for( int j = -1; j <= 1; j++){
-            // skip itself    
-            if( i == 0 && j == 0){
-                continue;
-            }
-
-            // count the number of alive neighbors
-            if(x + i >= 0 && x+i < rows && y+j >= 0 && y+j < cols){
-                if(blocks[x+i][y+j].isAlive){
-                    count++;
-                }
-            }
-        }
-    }
-    return count;
 }
 
 // show the grid

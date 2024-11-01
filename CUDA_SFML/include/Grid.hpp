@@ -32,7 +32,7 @@ public:
     void generateLivingStatusOMP();
 
     bool updateByRule(int aliveNeighbors, bool isAlive);
-    void updateLivingStatus(Matrix *matrix, Matrix *updatedMatrix);
+    void updateLivingStatus(Matrix *matrix);
 
     void showGrid(sf::RenderWindow &window);
     

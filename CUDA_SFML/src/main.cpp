@@ -41,7 +41,7 @@ int main() {
     sf::RenderWindow window(vm, "CUDA + SFML");
 
     // Visualization of result 
-    Grid grid(width, height, A);
+    Grid grid(height, width, A);
     
     while (window.isOpen()) {
         auto event = sf::Event{};
@@ -60,12 +60,13 @@ int main() {
         }
         // swap A and B every loop
         launchMatMulKernel(A, B, width, height);
+        // now matrix B is the next frame
 
         // synchronize
         cudaDeviceSynchronize();
         
         // update the living status of the blocks
-        grid.updateLivingStatus(A, B);
+        grid.updateLivingStatus(B);
 
         // show the grid
         grid.showGrid(window);
