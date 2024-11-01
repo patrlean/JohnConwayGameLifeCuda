@@ -19,6 +19,7 @@ int main(int argc, char *argv[]) {
     width = windowWidth / cellSize;
     height = windowHeight / cellSize;
     Matrix *A, *B;
+    bool *d_A = nullptr, *d_B = nullptr;
     if( processingType == "MANAGED" ){
         // apply for memory
         cudaMallocManaged((void**)&A, sizeof(Matrix));
@@ -43,7 +44,7 @@ int main(int argc, char *argv[]) {
         B->elements = new bool[width * height];
 
         // allocate device memory
-        bool *d_A = nullptr, *d_B = nullptr;
+        
         cudaMalloc((void**)&d_A, width * height * sizeof(bool));
         cudaMalloc((void**)&d_B, width * height * sizeof(bool));
     }else{
