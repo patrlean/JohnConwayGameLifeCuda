@@ -147,6 +147,9 @@ int main(int argc, char *argv[]) {
     }
     // Cleanup
     if(processingType == "MANAGED") {
+        // free device memory
+        cudaFree(d_A);
+        cudaFree(d_B);
         cudaFree(A->elements);
         cudaFree(B->elements);
         cudaFree(A);

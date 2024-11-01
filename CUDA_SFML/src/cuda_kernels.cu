@@ -73,9 +73,7 @@ void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, i
         // copy data to host
         cudaMemcpy(B->elements, d_B, width * height * sizeof(bool), cudaMemcpyDeviceToHost);
 
-        // free device memory
-        cudaFree(d_A);
-        cudaFree(d_B);
+        
     }else{
         matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
     }
