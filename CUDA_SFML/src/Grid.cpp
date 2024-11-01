@@ -50,8 +50,6 @@ void Grid::updateLivingStatus(Matrix *matrix){
                 block.setFillColor(sf::Color::Black);
             }
 
-            // reset isUpdated
-            block.isUpdated = false;
             col_idx++;
         }
         row_idx++;
