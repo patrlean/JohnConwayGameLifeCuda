@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
     height = windowHeight / cellSize;
     Matrix *A, *B;
     bool *d_A = nullptr, *d_B = nullptr;
+    
     if( processingType == "MANAGED" ){
         // apply for memory
         cudaMallocManaged((void**)&A, sizeof(Matrix));
@@ -31,6 +32,15 @@ int main(int argc, char *argv[]) {
         int nBytes = width * height * sizeof(bool);
         cudaMallocManaged((void**)&A->elements, nBytes);
         cudaMallocManaged((void**)&B->elements, nBytes);
+        // initialize matrix data
+        A->width = width;
+        A->height = height;
+        B->width = width;
+        B->height = height; 
+        for (int i = 0; i < width * height; ++i) {
+            A->elements[i] = rand() % 2;
+            B->elements[i] = A->elements[i];
+        }
 
     }else if( processingType == "PINNED" ){
         // apply for memory
@@ -39,31 +49,44 @@ int main(int argc, char *argv[]) {
         int nBytes = width * height * sizeof(bool);
         cudaMallocHost((void**)&A->elements, nBytes);
         cudaMallocHost((void**)&B->elements, nBytes);
+        // initialize matrix data
+        A->width = width;
+        A->height = height;
+        B->width = width;
+        B->height = height; 
+        for (int i = 0; i < width * height; ++i) {
+            A->elements[i] = rand() % 2;
+            B->elements[i] = A->elements[i];
+        }
     }else if( processingType == "NORMAL" ){
         // normal mode
-        // Allocate host memory
         A = new Matrix;
         B = new Matrix;
         A->elements = new bool[width * height];
         B->elements = new bool[width * height];
 
         // allocate device memory
-        
         cudaMalloc((void**)&d_A, width * height * sizeof(bool));
         cudaMalloc((void**)&d_B, width * height * sizeof(bool));
+
+        // initialize matrix data
+        A->width = width;
+        A->height = height;
+        B->width = width;
+        B->height = height; 
+        for (int i = 0; i < width * height; ++i) {
+            A->elements[i] = rand() % 2;
+            B->elements[i] = A->elements[i];
+        }
+
+        cudaMemcpy(d_A, A->elements, width * height * sizeof(bool), cudaMemcpyHostToDevice);
+        cudaMemcpy(d_B, B->elements, width * height * sizeof(bool), cudaMemcpyHostToDevice);
+
     }else{
         std::cout << "Invalid processing type" << std::endl;
         return -1;
     }
-    // initialize matrix data
-    A->width = width;
-    A->height = height;
-    B->width = width;
-    B->height = height; 
-    for (int i = 0; i < width * height; ++i) {
-        A->elements[i] = rand() % 2;
-        B->elements[i] = A->elements[i];
-    }
+    
 
     // Perform CUDA vector operation
     dim3 blockSize(32, 32);
@@ -148,8 +171,6 @@ int main(int argc, char *argv[]) {
     // Cleanup
     if(processingType == "MANAGED") {
         // free device memory
-        cudaFree(d_A);
-        cudaFree(d_B);
         cudaFree(A->elements);
         cudaFree(B->elements);
         cudaFree(A);

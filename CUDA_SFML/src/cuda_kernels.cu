@@ -46,11 +46,11 @@ __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
         int aliveNeighbors = countAliveMembers(A, row, col);
         // check rules and generate matrix after update
         if( aliveNeighbors == 3){
-            setElement(B, row, col, true);
+            B->elements[index] = true;
         }else if( aliveNeighbors == 2 && A->elements[index]){
-            setElement(B, row, col, true);
+            B->elements[index] = true;
         }else{
-            setElement(B, row, col, false);
+            B->elements[index] = false;
         }
     }
     // now matrix B is the next frame
@@ -77,11 +77,6 @@ void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, i
     }else{
         matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
     }
-}
-
-
-__device__ void setElement(Matrix *A, int row, int col, bool value) {
-    A->elements[row * A->width + col] = value;
 }
 
 __device__ int countAliveMembers(Matrix *A, int row, int col) {
