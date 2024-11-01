@@ -136,7 +136,7 @@ int main(int argc, char *argv[]) {
             int threadsPerBlock = numThreads;
             
             std::cout << "100 generations took " << averageTime 
-                      << " microsecs with " << threadsPerB  lock 
+                      << " microsecs with " << threadsPerBlock 
                       << " threads per block using " << processingType 
                       << " memory allocation." << std::endl;
             
