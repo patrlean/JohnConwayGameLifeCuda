@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Set the required CUDA version (optional)
 set(CMAKE_CUDA_STANDARD 11)
-set(CMAKE_CUDA_ARCHITECTURES 70 75 80 86)  # or specify your target architecture here
+set(CMAKE_CUDA_ARCHITECTURES 60 61 62 70 72 75 80 86)  # or specify your target architecture here
 
 # Project name
 project(game_cuda LANGUAGES CXX CUDA)
@@ -57,6 +57,6 @@ set_target_properties(
     VS_DEBUGGER_WORKING_DIRECTORY "${COMMON_OUTPUT_DIR}/bin"
 )
 # Compile Info
-set_target_properties(game_cuda PROPERTIES CUDA_ARCHITECTURES "80")
+set_target_properties(game_cuda PROPERTIES CUDA_ARCHITECTURES "70;80")
 target_compile_features(game_cuda PUBLIC cxx_std_11)
 target_compile_features(game_cuda PUBLIC cuda_std_11)
