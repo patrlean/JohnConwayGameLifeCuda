@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
     height = windowHeight / cellSize;
     Matrix *A, *B;
     bool *d_A = nullptr, *d_B = nullptr;
+    std::cout << "Processing type: " << processingType << std::endl;
     
     if( processingType == "MANAGED" ){
         // apply for memory
