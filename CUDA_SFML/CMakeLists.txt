@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Set the required CUDA version (optional)
 set(CMAKE_CUDA_STANDARD 11)
-set(CMAKE_CUDA_ARCHITECTURES 80)  # or specify your target architecture here
+set(CMAKE_CUDA_ARCHITECTURES 70 75 80 86)  # or specify your target architecture here
 
 # Project name
 project(game_cuda LANGUAGES CXX CUDA)
