@@ -82,7 +82,6 @@ int main(int argc, char *argv[]) {
 
         cudaMemcpy(d_A, A->elements, width * height * sizeof(bool), cudaMemcpyHostToDevice);
         cudaMemcpy(d_B, B->elements, width * height * sizeof(bool), cudaMemcpyHostToDevice);
-
     }else{
         std::cout << "Invalid processing type" << std::endl;
         return -1;
@@ -108,13 +107,13 @@ int main(int argc, char *argv[]) {
         auto event = sf::Event{};
         while( window.pollEvent(event)){
             //close the window
-            if (event.type == sf::Event::KeyReleased){
+            // if (event.type == sf::Event::KeyReleased){
                 // close the window
                 if ( sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 {
                     window.close();
                 }
-            }
+            // }
             if (event.type == sf::Event::Closed){
                 window.close();
             }
