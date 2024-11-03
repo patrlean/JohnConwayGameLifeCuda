@@ -86,7 +86,7 @@ void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, i
     dim3 blockSize(blockDim, blockDim);
     dim3 gridSize((width + blockSize.x - 1) / blockSize.x, 
         (height + blockSize.y - 1) / blockSize.y);
-
+    cudaStream_t stream1, stream2; 
     // launch the kernel
     if( processingType == "NORMAL" ){
         // copy data to device  
