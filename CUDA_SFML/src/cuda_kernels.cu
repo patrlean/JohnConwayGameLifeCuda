@@ -99,14 +99,63 @@ void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, i
     }else if( processingType == "PINNED"){
         cudaStreamCreate(&stream1);
         cudaStreamCreate(&stream2);
-        // copy data to device
-        cudaMemcpyAsync(d_A, A->elements, width * height * sizeof(bool), cudaMemcpyHostToDevice, stream1);
-        // run kernel in stream1
-        matMulKernelNormal<<<gridSize, blockSize, 0, stream1>>>(d_A, d_B, width, height);
-        // copy data to host
-        cudaMemcpyAsync(B->elements, d_B, width * height * sizeof(bool), cudaMemcpyDeviceToHost, stream1);
-        // synchronize stream
+
+        static bool* device_A1 = nullptr;
+        static bool* device_B1 = nullptr;
+        static bool* device_A2 = nullptr;
+        static bool* device_B2 = nullptr;
+
+        // 计算每半部分的实际大小
+        int halfHeight = height / 2;
+        int remainingHeight = height - halfHeight; // 处理奇数高度的情况
+        
+        // 计算每个部分的实际大小（以字节为单位）
+        int size1 = halfHeight * width * sizeof(bool);
+        int size2 = remainingHeight * width * sizeof(bool);
+
+        // 为两个流分别分配设备内存，只分配需要的大小
+        cudaMalloc((void**)&device_A1, size1); // 上半部分
+        cudaMalloc((void**)&device_B1, size1);
+        cudaMalloc((void**)&device_A2, size2); // 下半部分
+        cudaMalloc((void**)&device_B2, size2);
+
+        // 在stream1中处理上半部分数据
+        cudaMemcpyAsync(device_A1, A->elements, size1, 
+                       cudaMemcpyHostToDevice, stream1);
+        
+        dim3 gridSize1((width + blockSize.x - 1) / blockSize.x, 
+                      (halfHeight + blockSize.y - 1) / blockSize.y);
+        
+        matMulKernelNormal<<<gridSize1, blockSize, 0, stream1>>>(
+            device_A1, device_B1, width, halfHeight);
+
+        // 在stream2中处理下半部分数据
+        cudaMemcpyAsync(device_A2, 
+                       A->elements + (halfHeight * width), // 指针偏移到下半部分
+                       size2, 
+                       cudaMemcpyHostToDevice, stream2);
+        
+        dim3 gridSize2((width + blockSize.x - 1) / blockSize.x, 
+                      (remainingHeight + blockSize.y - 1) / blockSize.y);
+        
+        matMulKernelNormal<<<gridSize2, blockSize, 0, stream2>>>(
+            device_A2, device_B2, width, remainingHeight);
+
+        // 异步传输结果回主机
+        cudaMemcpyAsync(B->elements, 
+                       device_B1, 
+                       size1, 
+                       cudaMemcpyDeviceToHost, stream1);
+                       
+        cudaMemcpyAsync(B->elements + (halfHeight * width), 
+                       device_B2, 
+                       size2, 
+                       cudaMemcpyDeviceToHost, stream2);
+
+        // 同步两个流
         cudaStreamSynchronize(stream1);
+        cudaStreamSynchronize(stream2);
+
 
     }else if( processingType == "MANAGED"){
         matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
