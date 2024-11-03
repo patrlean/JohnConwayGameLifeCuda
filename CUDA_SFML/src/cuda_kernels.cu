@@ -81,47 +81,26 @@ __global__ void testKernel(bool *data, int size) {
 //        width and height are the dimensions of the matrix, processingType is the type of memory management
 // output: B is the next frame
 void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, int height, std::string processingType) {
+    // define the block size and grid size
     int blockDim = (int)sqrt(numThreads) + 1;
-    // int blockDim = 32;
-    
     dim3 blockSize(blockDim, blockDim);
     dim3 gridSize((width + blockSize.x - 1) / blockSize.x, 
         (height + blockSize.y - 1) / blockSize.y);
-
-    // testKernel<<<gridSize, blockSize>>>(A->elements, width * height);
-    
-    cudaError_t err = cudaGetLastError();
-    if(err != cudaSuccess) {
-        std::cout << "Test kernel error: " << cudaGetErrorString(err) << std::endl;
-    }
-    cudaDeviceSynchronize();
-
+    // launch the kernel
     if( processingType == "NORMAL" ){
         // copy data to device  
-
-        // A is the current frame
         cudaMemcpy(d_A, A->elements, width * height * sizeof(bool), cudaMemcpyHostToDevice);
-
+        // launch the kernel
         matMulKernelNormal<<<gridSize, blockSize>>>(d_A, d_B, width, height);
-
         cudaDeviceSynchronize();
-
         // copy data to host
         cudaMemcpy(B->elements, d_B, width * height * sizeof(bool), cudaMemcpyDeviceToHost);
         
-    }else{
-        // check the CUDA error
-        cudaError_t err = cudaGetLastError();
-        if(err != cudaSuccess) {
-            std::cout << "CUDA error before kernel: " << cudaGetErrorString(err) << std::endl;
-        }
+    }else if( processingType == "PINNED"){
         matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
-        // check the kernel execution error
-        err = cudaGetLastError();
-        if(err != cudaSuccess) {
-            std::cout << "Kernel launch error: " << cudaGetErrorString(err) << std::endl;
-        }
-        // check the number of white cells in B
+        cudaDeviceSynchronize();
+    }else if( processingType == "MANAGED"){
+        matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
         cudaDeviceSynchronize();
     }
 }
