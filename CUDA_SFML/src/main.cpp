@@ -152,7 +152,7 @@ int main(int argc, char *argv[]) {
         // show the grid
         grid.showGrid(window);
 
-        // 计算两代的总处理时间（微秒）
+        // calculate the total processing time
         auto processingTime = 
             std::chrono::duration_cast<std::chrono::microseconds>(midTime - startTime).count() +
             std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime2).count();
@@ -160,7 +160,7 @@ int main(int argc, char *argv[]) {
         processingTimes.push_back(processingTime);
         generationCount += 2;
 
-        // 每100代输出一次统计
+        // output the statistics every 100 generations
         if (generationCount >= 100) {
             double averageTime = std::accumulate(processingTimes.begin(), 
                                                processingTimes.end(), 0.0) / processingTimes.size();
@@ -172,7 +172,7 @@ int main(int argc, char *argv[]) {
                       << " threads per block using " << processingType 
                       << " memory allocation." << std::endl;
             
-            // 重置计数器和时间记录
+            // reset the counter and the time record
             generationCount = 0;
             processingTimes.clear();
         }

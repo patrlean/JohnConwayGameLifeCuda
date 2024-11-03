@@ -64,9 +64,9 @@ __global__ void testKernel(bool *data, int size) {
 }
 
 void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, int height, std::string processingType) {
-    // int blockDim = (int)sqrt(numThreads);
-    int blockDim = 32;
-    std::cout << "blockDim: " << blockDim << std::endl;
+    int blockDim = (int)sqrt(numThreads) + 1;
+    // int blockDim = 32;
+    
     dim3 blockSize(blockDim, blockDim);
     dim3 gridSize((width + blockSize.x - 1) / blockSize.x, 
         (height + blockSize.y - 1) / blockSize.y);
@@ -93,41 +93,19 @@ void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, i
         cudaMemcpy(B->elements, d_B, width * height * sizeof(bool), cudaMemcpyDeviceToHost);
         
     }else{
-        // check the number of white cells in A
-        int countA = 0;
-        for(int i = 0; i < width * height; i++) {
-            if(A->elements[i]) countA++;
-        }
-        std::cout << "Before kernel - white cells in A: " << countA << std::endl;
-        
-        // check the matrix dimensions
-        std::cout << "Matrix dimensions - Width: " << A->width << ", Height: " << A->height << std::endl;
-        std::cout << "Grid dimensions - x: " << gridSize.x << ", y: " << gridSize.y << std::endl;
-        std::cout << "Block dimensions - x: " << blockSize.x << ", y: " << blockSize.y << std::endl;
-
         // check the CUDA error
         cudaError_t err = cudaGetLastError();
         if(err != cudaSuccess) {
             std::cout << "CUDA error before kernel: " << cudaGetErrorString(err) << std::endl;
         }
-
         matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
-
         // check the kernel execution error
         err = cudaGetLastError();
         if(err != cudaSuccess) {
             std::cout << "Kernel launch error: " << cudaGetErrorString(err) << std::endl;
         }
-
         // check the number of white cells in B
         cudaDeviceSynchronize();
-        int count = 0;
-        for( int i = 0; i < width * height; i++){
-            if( B->elements[i]){
-                count++;
-            }
-        }
-        std::cout << "current white count: " << count << std::endl;
     }
 }
 
