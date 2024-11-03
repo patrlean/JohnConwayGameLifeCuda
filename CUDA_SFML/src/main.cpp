@@ -19,6 +19,16 @@ int main(int argc, char *argv[]) {
     // parse arguments
     parseArgs(argc, argv);
 
+    // check the number of CUDA devices
+    int deviceCount;
+    cudaGetDeviceCount(&deviceCount);
+    std::cout << "Number of CUDA devices: " << deviceCount << std::endl;
+    
+    cudaDeviceProp deviceProp;
+    cudaGetDeviceProperties(&deviceProp, 0);
+    std::cout << "Using GPU: " << deviceProp.name << std::endl;
+
+
     // calculate the number of blocks in the window
     width = windowWidth / cellSize;
     height = windowHeight / cellSize;
