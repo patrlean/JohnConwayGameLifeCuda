@@ -71,7 +71,7 @@ void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, i
     dim3 gridSize((width + blockSize.x - 1) / blockSize.x, 
         (height + blockSize.y - 1) / blockSize.y);
 
-    testKernel<<<gridSize, blockSize>>>(A->elements, width * height);
+    // testKernel<<<gridSize, blockSize>>>(A->elements, width * height);
     
     cudaError_t err = cudaGetLastError();
     if(err != cudaSuccess) {
@@ -79,56 +79,56 @@ void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, i
     }
     cudaDeviceSynchronize();
 
-    // if( processingType == "NORMAL" ){
-    //     // copy data to device  
+    if( processingType == "NORMAL" ){
+        // copy data to device  
 
-    //     // A is the current frame
-    //     cudaMemcpy(d_A, A->elements, width * height * sizeof(bool), cudaMemcpyHostToDevice);
+        // A is the current frame
+        cudaMemcpy(d_A, A->elements, width * height * sizeof(bool), cudaMemcpyHostToDevice);
 
-    //     matMulKernelNormal<<<gridSize, blockSize>>>(d_A, d_B, width, height);
+        matMulKernelNormal<<<gridSize, blockSize>>>(d_A, d_B, width, height);
 
-    //     cudaDeviceSynchronize();
+        cudaDeviceSynchronize();
 
-    //     // copy data to host
-    //     cudaMemcpy(B->elements, d_B, width * height * sizeof(bool), cudaMemcpyDeviceToHost);
+        // copy data to host
+        cudaMemcpy(B->elements, d_B, width * height * sizeof(bool), cudaMemcpyDeviceToHost);
         
-    // }else{
-    //     // check the number of white cells in A
-    //     int countA = 0;
-    //     for(int i = 0; i < width * height; i++) {
-    //         if(A->elements[i]) countA++;
-    //     }
-    //     std::cout << "Before kernel - white cells in A: " << countA << std::endl;
+    }else{
+        // check the number of white cells in A
+        int countA = 0;
+        for(int i = 0; i < width * height; i++) {
+            if(A->elements[i]) countA++;
+        }
+        std::cout << "Before kernel - white cells in A: " << countA << std::endl;
         
-    //     // check the matrix dimensions
-    //     std::cout << "Matrix dimensions - Width: " << A->width << ", Height: " << A->height << std::endl;
-    //     std::cout << "Grid dimensions - x: " << gridSize.x << ", y: " << gridSize.y << std::endl;
-    //     std::cout << "Block dimensions - x: " << blockSize.x << ", y: " << blockSize.y << std::endl;
+        // check the matrix dimensions
+        std::cout << "Matrix dimensions - Width: " << A->width << ", Height: " << A->height << std::endl;
+        std::cout << "Grid dimensions - x: " << gridSize.x << ", y: " << gridSize.y << std::endl;
+        std::cout << "Block dimensions - x: " << blockSize.x << ", y: " << blockSize.y << std::endl;
 
-    //     // check the CUDA error
-    //     cudaError_t err = cudaGetLastError();
-    //     if(err != cudaSuccess) {
-    //         std::cout << "CUDA error before kernel: " << cudaGetErrorString(err) << std::endl;
-    //     }
+        // check the CUDA error
+        cudaError_t err = cudaGetLastError();
+        if(err != cudaSuccess) {
+            std::cout << "CUDA error before kernel: " << cudaGetErrorString(err) << std::endl;
+        }
 
-    //     matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
+        matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
 
-    //     // check the kernel execution error
-    //     err = cudaGetLastError();
-    //     if(err != cudaSuccess) {
-    //         std::cout << "Kernel launch error: " << cudaGetErrorString(err) << std::endl;
-    //     }
+        // check the kernel execution error
+        err = cudaGetLastError();
+        if(err != cudaSuccess) {
+            std::cout << "Kernel launch error: " << cudaGetErrorString(err) << std::endl;
+        }
 
-    //     // check the number of white cells in B
-    //     cudaDeviceSynchronize();
-    //     int count = 0;
-    //     for( int i = 0; i < width * height; i++){
-    //         if( B->elements[i]){
-    //             count++;
-    //         }
-    //     }
-    //     std::cout << "current white count: " << count << std::endl;
-    // }
+        // check the number of white cells in B
+        cudaDeviceSynchronize();
+        int count = 0;
+        for( int i = 0; i < width * height; i++){
+            if( B->elements[i]){
+                count++;
+            }
+        }
+        std::cout << "current white count: " << count << std::endl;
+    }
 }
 
 __device__ int countAliveMembers(Matrix *A, int row, int col) {
