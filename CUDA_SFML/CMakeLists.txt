@@ -13,7 +13,6 @@ project(game_cuda LANGUAGES CXX CUDA)
 
 # Include SFML
 include_directories(${PROJECT_SOURCE_DIR}/../SFML/include)
-
 link_directories(${PROJECT_SOURCE_DIR}/../SFML/lib)
 
 # Include CUDA
@@ -34,17 +33,17 @@ include_directories(include)
 add_executable(game_cuda 
     src/main.cpp 
     src/cuda_kernels.cu
-    src/cuda_kernels.cuh
+    # src/cuda_kernels.cuh
     src/parameterParse.cpp 
     src/Globals.cpp
     src/Grid.cpp
     src/Block.cpp
 
-    include/parameterParse.hpp
-    include/Globals.hpp
-    include/Grid.hpp
-    include/Block.hpp
-    include/matrix.hpp
+    # include/parameterParse.hpp
+    # include/Globals.hpp
+    # include/Grid.hpp
+    # include/Block.hpp
+    # include/matrix.hpp
     )
 
 # Link SFML libraries
