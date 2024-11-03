@@ -88,7 +88,6 @@ int main(int argc, char *argv[]) {
         return -1;
     }
     
-
     // Perform CUDA vector operation
     dim3 blockSize(32, 32);
     dim3 gridSize((width + blockSize.x - 1) / blockSize.x, 
@@ -125,7 +124,7 @@ int main(int argc, char *argv[]) {
         launchMatMulKernel(A, B, d_A, d_B, width, height, processingType);
         // now matrix B is the next frame
         // synchronize
-        cudaDeviceSynchronize();
+        
         auto midTime = std::chrono::high_resolution_clock::now();
 
         // update the living status of the blocks
@@ -137,7 +136,7 @@ int main(int argc, char *argv[]) {
         // swap A and B every loop
         launchMatMulKernel(B, A, d_A, d_B, width, height, processingType);
         // synchronize
-        cudaDeviceSynchronize();
+        
         auto endTime = std::chrono::high_resolution_clock::now();
 
         grid.updateLivingStatus(A);

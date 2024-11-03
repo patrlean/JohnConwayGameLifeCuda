@@ -69,13 +69,15 @@ void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, i
         cudaMemcpy(d_A, A->elements, width * height * sizeof(bool), cudaMemcpyHostToDevice);
 
         matMulKernelNormal<<<gridSize, blockSize>>>(d_A, d_B, width, height);
+        
+        cudaDeviceSynchronize();
 
         // copy data to host
         cudaMemcpy(B->elements, d_B, width * height * sizeof(bool), cudaMemcpyDeviceToHost);
-
         
     }else{
         matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
+        cudaDeviceSynchronize();
     }
 }
 
