@@ -80,6 +80,13 @@ void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, i
     }else{
         matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
         cudaDeviceSynchronize();
+        int count = 0;
+        for( int i = 0; i < width * height; i++){
+            if( B->elements[i]){
+                count++;
+            }
+        }
+        std::cout << "current white count: " << count << std::endl;
     }
 }
 

@@ -49,7 +49,6 @@ void Grid::updateLivingStatus(Matrix *matrix){
             }else{
                 block.setFillColor(sf::Color::Black);
             }
-
             col_idx++;
         }
         row_idx++;
