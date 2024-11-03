@@ -1,9 +1,10 @@
 /*
 Author: Tianyou Zhao 
 Class: ECE6122 
-Last Date Modified: 03-10-2024
+Last Date Modified: 03-11-2024
 Description:
-This is the implementation of Grid class, which is used to store the status of the grid and some functions to generate the living status of the blocks.
+This is the implementation of Grid class, which is used to store the status of the grid and some functions to update the living status of the blocks. 
+Revised from LAB2.
 */
 #include "Grid.hpp"
 #include <random>

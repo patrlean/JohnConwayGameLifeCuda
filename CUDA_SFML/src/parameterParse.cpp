@@ -1,3 +1,11 @@
+/*
+Author: Tianyou Zhao 
+Class: ECE6122 
+Last Date Modified: 03-11-2024
+Description:
+This is the implementation of parameterParse.hpp, which is used to parse the arguments.
+Revised from LAB2.
+*/
 #include "parameterParse.hpp"
 
 using namespace std;

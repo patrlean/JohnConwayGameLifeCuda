@@ -1,4 +1,10 @@
-// cuda_kernels.cuh
+/*
+Author: Tianyou Zhao 
+Class: ECE6122 
+Last Date Modified: 03-11-2024
+Description:
+This is CUDA_KERNELS.cuh, which is used to implement the CUDA kernels.
+*/
 #ifndef CUDA_KERNELS_H
 #define CUDA_KERNELS_H
 

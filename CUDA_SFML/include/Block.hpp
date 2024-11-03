@@ -1,10 +1,11 @@
 /*
 Author: Tianyou Zhao 
 Class: ECE6122 
-Last Date Modified: 03-10-2024
+Last Date Modified: 03-11-2024
 Description:
 This is the header file of Block class, which is used to store the status of a block in the grid.
 Some header files are included.
+Revised from LAB2.
 */
 #ifndef BLOCK_HPP
 #define BLOCK_HPP

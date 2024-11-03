@@ -1,9 +1,10 @@
 /*
 Author: Tianyou Zhao 
 Class: ECE6122 
-Last Date Modified: 03-10-2024
+Last Date Modified: 03-11-2024
 Description:
 This is the header file of Globals.cpp.
+Revised from LAB2.
 */
 
 // include/Constants.hpp

@@ -1,9 +1,10 @@
 /*
 Author: Tianyou Zhao 
 Class: ECE6122 
-Last Date Modified: 03-10-2024
+Last Date Modified: 03-11-2024
 Description:
 This is the implementation of Globals.hpp, which is used to store the global variables.
+Revised from LAB2.
 */
 
 // src/Constants.cpp

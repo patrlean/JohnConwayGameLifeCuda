@@ -1,10 +1,19 @@
-// cuda_kernels.cu
+/*
+Author: Tianyou Zhao 
+Class: ECE6122 
+Last Date Modified: 03-11-2024
+Description:
+This is the implementation of cuda_kernels.cuh, which is used to implement the CUDA kernels.
+*/
 #include "cuda_kernels.cuh"
 #include <iostream>
 #include <stdio.h>
 
 
 // Kernel for normal memory mode
+// input: A is the current frame, B is the next frame
+// output: B is the next frame
+// Normal mode for memory management
 __global__ void matMulKernelNormal(bool* A, bool* B, int width, int height) {
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
@@ -35,6 +44,9 @@ __global__ void matMulKernelNormal(bool* A, bool* B, int width, int height) {
     }
 }
 
+// Kernel for pinned memory mode and managed memory mode
+// input: A is the current frame, B is the next frame
+// output: B is the next frame
 __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
     // get position of current thread
     int row = blockIdx.y * blockDim.y + threadIdx.y;
@@ -56,6 +68,7 @@ __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height) {
     // now matrix B is the next frame
 }
 
+// Kernel for testing
 __global__ void testKernel(bool *data, int size) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
     if (idx < size) {
@@ -63,6 +76,10 @@ __global__ void testKernel(bool *data, int size) {
     }
 }
 
+// launch the kernel
+// input: A is the current frame, B is the next frame, d_A and d_B are the device memory for A and B, 
+//        width and height are the dimensions of the matrix, processingType is the type of memory management
+// output: B is the next frame
 void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, int height, std::string processingType) {
     int blockDim = (int)sqrt(numThreads) + 1;
     // int blockDim = 32;
@@ -109,6 +126,9 @@ void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, i
     }
 }
 
+// count the number of alive neighbors
+// input: A is the current frame, row and col are the position of the cell
+// output: the number of alive neighbors
 __device__ int countAliveMembers(Matrix *A, int row, int col) {
     int count = 0;
     // iterate all neighbors
