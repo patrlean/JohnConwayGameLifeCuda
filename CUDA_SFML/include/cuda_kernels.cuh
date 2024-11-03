@@ -12,6 +12,8 @@ __global__ void matMulKernel(Matrix* A, Matrix* B, int width, int height);
 // For normal memory
 __global__ void matMulKernelNormal(bool* A, bool* B, int width, int height);
 
+__global__ void testKernel(bool *data, int size);
+
 __device__ void setElement(Matrix *A, int row, int col, bool value);
 
 __device__ int countAliveMembers(Matrix *A, int row, int col);
