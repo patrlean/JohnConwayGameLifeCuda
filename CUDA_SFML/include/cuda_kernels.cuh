@@ -26,4 +26,6 @@ __device__ int countAliveMembers(Matrix *A, int row, int col);
 
 void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, int height, std::string processingType);
 
+cudaStream_t stream1, stream2; 
+
 #endif

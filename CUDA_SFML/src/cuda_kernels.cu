@@ -86,6 +86,7 @@ void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, i
     dim3 blockSize(blockDim, blockDim);
     dim3 gridSize((width + blockSize.x - 1) / blockSize.x, 
         (height + blockSize.y - 1) / blockSize.y);
+
     // launch the kernel
     if( processingType == "NORMAL" ){
         // copy data to device  
@@ -95,10 +96,18 @@ void launchMatMulKernel(Matrix* A, Matrix* B, bool* d_A, bool* d_B, int width, i
         cudaDeviceSynchronize();
         // copy data to host
         cudaMemcpy(B->elements, d_B, width * height * sizeof(bool), cudaMemcpyDeviceToHost);
-        
     }else if( processingType == "PINNED"){
-        matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
-        cudaDeviceSynchronize();
+        cudaStreamCreate(&stream1);
+        cudaStreamCreate(&stream2);
+        // copy data to device
+        cudaMemcpyAsync(d_A, A->elements, width * height * sizeof(bool), cudaMemcpyHostToDevice, stream1);
+        // run kernel in stream1
+        matMulKernelNormal<<<gridSize, blockSize, 0, stream1>>>(d_A, d_B, width, height);
+        // copy data to host
+        cudaMemcpyAsync(B->elements, d_B, width * height * sizeof(bool), cudaMemcpyDeviceToHost, stream1);
+        // synchronize stream
+        cudaStreamSynchronize(stream1);
+
     }else if( processingType == "MANAGED"){
         matMulKernel<<<gridSize, blockSize>>>(A, B, width, height);
         cudaDeviceSynchronize();

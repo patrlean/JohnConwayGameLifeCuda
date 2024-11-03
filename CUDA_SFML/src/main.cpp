@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
         }
 
     }else if( processingType == "PINNED" ){
-        // apply for memory
+        // apply for host memory
         cudaMallocHost((void**)&A, sizeof(Matrix));
         cudaMallocHost((void**)&B, sizeof(Matrix));
         int nBytes = width * height * sizeof(bool);
@@ -75,17 +75,18 @@ int main(int argc, char *argv[]) {
             A->elements[i] = rand() % 2;
             B->elements[i] = A->elements[i];
         }
+        // apply for device memory
+        cudaMalloc((void**)&d_A, width * height * sizeof(bool));
+        cudaMalloc((void**)&d_B, width * height * sizeof(bool));
     }else if( processingType == "NORMAL" ){
-        // normal mode
+        // apply for host memory
         A = new Matrix;
         B = new Matrix;
         A->elements = new bool[width * height];
         B->elements = new bool[width * height];
-
         // allocate device memory
         cudaMalloc((void**)&d_A, width * height * sizeof(bool));
         cudaMalloc((void**)&d_B, width * height * sizeof(bool));
-
         // initialize matrix data
         A->width = width;
         A->height = height;
